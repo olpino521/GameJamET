@@ -1,17 +1,28 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerActions : MonoBehaviour
 {
     [SerializeField]
-    private float move = 1f;
+    private float forward = 8f;
+    [SerializeField]
+    private float jump = 8f;
+
+    private Rigidbody rb;
+
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     public void Jump()
     {
-        transform.position += Vector3.up * move;
+        rb.AddForce(new Vector3(0f, jump + 5f, 0f), ForceMode.Impulse);
     }
-    
-    public void MoveLeft()
+
+    public void MoveForward()
     {
-        transform.position += Vector3.left * move;
+        rb.AddForce(new Vector3(forward + 5f, 0f, 0f), ForceMode.Impulse);
     }
 }
